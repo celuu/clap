@@ -1,17 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 import { baseTheme } from '@chakra-ui/theme'
-import { Provider } from '@chakra-ui/react';
-import { HomePage } from './components/HomePage';
+import { ChakraProvider } from "@chakra-ui/react";
+
+import { HomePage } from './pages/HomePage';
 
 
 function App() {
   return (
-      <Provider theme={baseTheme}>
-        <HomePage />
-    
-    </Provider>
+    <ChakraProvider theme={baseTheme}>
+      <HomePage />
+    </ChakraProvider>
   );
 }
 

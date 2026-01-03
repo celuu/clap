@@ -1,6 +1,42 @@
-# Getting Started with Create React App
+# Clap
+
+A React + TypeScript application with Chakra UI and Supabase integration.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Project Structure
+
+```
+src/
+├── assets/          # Static assets (images, SVGs, fonts)
+├── components/      # Reusable UI components
+├── config/          # Configuration files (Supabase client, etc.)
+├── constants/       # Application constants
+├── features/        # Feature-based modules (for complex features)
+├── hooks/           # Custom React hooks
+├── pages/           # Page-level components
+├── services/        # API services and external integrations
+├── styles/          # Global styles and CSS files
+├── types/           # TypeScript type definitions
+└── utils/           # Utility functions
+```
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Tech Stack
+
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Chakra UI** - Component library
+- **Supabase** - Backend as a service
+- **Framer Motion** - Animation library
 
 ## Available Scripts
 
