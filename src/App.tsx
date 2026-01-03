@@ -1,14 +1,14 @@
 import React from 'react';
 import './styles/App.css';
-import { baseTheme } from '@chakra-ui/theme'
 import { ChakraProvider } from "@chakra-ui/react";
+import theme from './config/theme';
 
 import { HomePage } from './pages/HomePage';
 
 
 function App() {
   return (
-    <ChakraProvider theme={baseTheme}>
+    <ChakraProvider theme={theme}>
       <HomePage />
     </ChakraProvider>
   );
