@@ -66,3 +66,11 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 # clap
+
+## 🚀 Important Guides
+
+- **`NAVIGATION_GUIDE.md`** - How the sidebar navigation works (START HERE!)
+- **`GETTING_STARTED.md`** - Project setup and quick start
+- **`COMPONENT_GUIDE.md`** - Detailed component usage
+- **`QUICK_REFERENCE.md`** - Component cheat sheet
+- **`ARCHITECTURE.md`** - Project structure and best practices

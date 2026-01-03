@@ -4,6 +4,31 @@ This directory contains all reusable UI components built with Chakra UI.
 
 ## Available Components
 
+### AppLayout
+The main application layout that includes the sidebar and wraps all page content.
+
+```tsx
+import { AppLayout } from '@/components/AppLayout';
+
+// In App.tsx - wraps all routes
+<AppLayout>
+  <Routes>
+    <Route path="/" element={<Dashboard />} />
+  </Routes>
+</AppLayout>
+```
+
+**Features:**
+- Contains the fixed sidebar navigation
+- Automatically highlights active route
+- Handles all navigation with React Router
+- Provides consistent layout spacing
+- Appears on every page automatically
+
+**Note:** You only need this in `App.tsx` - individual pages don't need to import it!
+
+---
+
 ### Card
 A flexible container component with consistent styling.
 
@@ -235,4 +260,4 @@ When adding a new component:
 
 ## Examples
 
-See `/src/pages/HomePage/index.tsx` for a complete example of all components working together.
+See `/src/pages/Dashboard/index.tsx` for a complete example of all components working together.

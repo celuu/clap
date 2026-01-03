@@ -10,8 +10,6 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { Sidebar } from '../../components/Sidebar';
-import { Layout } from '../../components/Layout';
 import { Header } from '../../components/Header';
 import { StatCard } from '../../components/StatCard';
 import { Card } from '../../components/Card';
@@ -50,21 +48,10 @@ const TargetIcon = () => (
   </Icon>
 );
 
-export const HomePage = () => {
+export const Dashboard = () => {
   return (
-    <Box>
-      {/* Sidebar */}
-      <Sidebar>
-        <Sidebar.NavItem icon={CalendarIcon} label="Dashboard" isActive />
-        <Sidebar.NavItem icon={TargetIcon} label="Habit Tracker" />
-        <Sidebar.NavItem icon={BookIcon} label="Daily Journal" />
-        <Sidebar.NavItem icon={CalendarIcon} label="Daily Schedule" />
-        <Sidebar.NavItem icon={DumbbellIcon} label="Workout Plans" />
-      </Sidebar>
-
-      {/* Main Content */}
-      <Layout>
-        <Header userName="Alex" date="Wednesday, December 31, 2025" />
+    <>
+      <Header userName="Alex" date="Wednesday, December 31, 2025" />
 
         <Container maxW="container.xl" py={8}>
           <VStack spacing={8} align="stretch">
@@ -201,7 +188,6 @@ export const HomePage = () => {
             </Grid>
           </VStack>
         </Container>
-      </Layout>
-    </Box>
+    </>
   );
 };
