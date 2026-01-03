@@ -2,6 +2,8 @@
 
 This directory contains all reusable UI components built with Chakra UI.
 
+All components are in single files for simplicity - no nested folders or index files!
+
 ## Available Components
 
 ### AppLayout
@@ -251,12 +253,13 @@ All components use the custom theme located in `/src/config/theme.ts`. You can c
 
 When adding a new component:
 
-1. Create a folder: `ComponentName/`
-2. Create the component: `ComponentName.tsx`
-3. Create the export: `index.tsx`
-4. Export from index: `export { ComponentName } from './ComponentName';`
-5. Add tests: `ComponentName.test.tsx`
-6. Document in this README
+1. Create a single file: `ComponentName.tsx` directly in `/components/`
+2. Export your component: `export const ComponentName = () => { ... }`
+3. Import where needed: `import { ComponentName } from '../../components/ComponentName';`
+4. Add tests alongside if needed: `ComponentName.test.tsx`
+5. Document in this README
+
+**That's it! No folders, no index files, just simple single files.**
 
 ## Examples
 

@@ -1,11 +1,10 @@
 import { Container, VStack, Text } from '@chakra-ui/react';
-import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 
 export const HabitTracker = () => {
   return (
     <>
-      <Header userName="Christine" />
+
       <Container maxW="container.xl" py={8}>
         <VStack spacing={6} align="stretch">
           <Card>

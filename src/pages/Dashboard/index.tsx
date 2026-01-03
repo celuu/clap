@@ -10,7 +10,6 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { Header } from '../../components/Header';
 import { StatCard } from '../../components/StatCard';
 import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
@@ -51,7 +50,6 @@ const TargetIcon = () => (
 export const Dashboard = () => {
   return (
     <>
-      <Header userName="Alex" date="Wednesday, December 31, 2025" />
 
         <Container maxW="container.xl" py={8}>
           <VStack spacing={8} align="stretch">

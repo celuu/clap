@@ -69,8 +69,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## 🚀 Important Guides
 
-- **`NAVIGATION_GUIDE.md`** - How the sidebar navigation works (START HERE!)
-- **`GETTING_STARTED.md`** - Project setup and quick start
+- **`STRUCTURE_EXPLAINED.md`** - ⭐ Why we use flat files (read this!)
+- **`NAVIGATION_GUIDE.md`** - How the sidebar navigation works
 - **`COMPONENT_GUIDE.md`** - Detailed component usage
 - **`QUICK_REFERENCE.md`** - Component cheat sheet
 - **`ARCHITECTURE.md`** - Project structure and best practices

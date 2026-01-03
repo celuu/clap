@@ -6,7 +6,7 @@ interface HeaderProps {
   date?: string;
 }
 
-export const Header = ({ userName = 'Alex', date }: HeaderProps) => {
+export const Header = ({ userName = 'Christine', date }: HeaderProps) => {
   const today = date || new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',

@@ -2,8 +2,9 @@ import { Box, Icon } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { Sidebar } from '../Sidebar';
-import { Layout } from '../Layout';
+import { Sidebar } from './Sidebar';
+import { Layout } from './Layout';
+import { Header } from './Header';
 
 // Custom icons
 const TargetIcon = () => (
@@ -69,7 +70,10 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
       </Sidebar>
 
       {/* Main Content - with Layout spacing */}
-      <Layout>{children}</Layout>
+      <Layout>
+        <Header userName="Christine" />
+        {children}
+      </Layout>
     </Box>
   );
 };

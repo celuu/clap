@@ -1,2 +1,0 @@
-export { ScheduleItem } from './ScheduleItem';
-

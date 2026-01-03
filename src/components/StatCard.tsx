@@ -1,6 +1,6 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { Card } from '../Card';
+import { Card } from './Card';
 
 interface StatCardProps {
   label: string;
