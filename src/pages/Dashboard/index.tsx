@@ -48,144 +48,146 @@ const TargetIcon = () => (
 );
 
 export const Dashboard = () => {
+
+
   return (
     <>
+      <Container maxW="container.xl" py={8}>
 
-        <Container maxW="container.xl" py={8}>
-          <VStack spacing={8} align="stretch">
-            {/* Top Stats Grid */}
-            <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-              <GridItem>
-                <StatCard
-                  label="Habit Streak"
-                  value="12 Days"
-                  icon={<FireIcon />}
-                  iconColor="orange.500"
-                />
-              </GridItem>
-              <GridItem>
-                <StatCard
-                  label="Next Event"
-                  value="10:00 AM"
-                  icon={<ClockIcon />}
+        <VStack spacing={8} align="stretch">
+          {/* Top Stats Grid */}
+          <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+            <GridItem>
+              <StatCard
+                label="Habit Streak"
+                value="12 Days"
+                icon={<FireIcon />}
+                iconColor="orange.500"
+              />
+            </GridItem>
+            <GridItem>
+              <StatCard
+                label="Next Event"
+                value="10:00 AM"
+                icon={<ClockIcon />}
+                iconColor="blue.500"
+              />
+            </GridItem>
+            <GridItem>
+              <StatCard
+                label="Workouts"
+                value="4/5 week"
+                icon={<DumbbellIcon />}
+                iconColor="green.500"
+              />
+            </GridItem>
+          </Grid>
+
+          {/* Main Content Grid */}
+          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+            {/* Daily Schedule */}
+            <GridItem>
+              <Card>
+                <SectionHeader
+                  icon={CalendarIcon}
+                  title="Daily Schedule"
                   iconColor="blue.500"
+                  action={{
+                    label: "View All",
+                    onClick: () => console.log("View all schedule"),
+                  }}
                 />
-              </GridItem>
-              <GridItem>
-                <StatCard
-                  label="Workouts"
-                  value="4/5 week"
-                  icon={<DumbbellIcon />}
+                <VStack spacing={0} align="stretch" divider={<Divider />}>
+                  <ScheduleItem
+                    time="08:00 AM"
+                    title="Morning Routine"
+                    category="HEALTH"
+                    categoryColor="green.500"
+                  />
+                  <ScheduleItem
+                    time="10:00 AM"
+                    title="Deep Work Session"
+                    category="WORK"
+                    categoryColor="blue.500"
+                  />
+                  <ScheduleItem
+                    time="01:00 PM"
+                    title="Gym - Leg Day"
+                    category="FITNESS"
+                    categoryColor="orange.500"
+                  />
+                </VStack>
+              </Card>
+            </GridItem>
+
+            {/* Habit Tracking */}
+            <GridItem>
+              <Card>
+                <SectionHeader
+                  icon={TargetIcon}
+                  title="Habit Tracking"
                   iconColor="green.500"
                 />
-              </GridItem>
-            </Grid>
+                <Box mb={2}>
+                  <Text fontSize="sm" color="gray.500" mb={4}>
+                    60% Complete
+                  </Text>
+                </Box>
+                <VStack spacing={2} align="stretch">
+                  <HabitItem label="Meditate (10m)" isCompleted />
+                  <HabitItem label="Read 20 Pages" isCompleted />
+                  <HabitItem label="No Sugar" />
+                  <HabitItem label="Hydrate 3L" />
+                </VStack>
+              </Card>
+            </GridItem>
 
-            {/* Main Content Grid */}
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-              {/* Daily Schedule */}
-              <GridItem>
-                <Card>
-                  <SectionHeader
-                    icon={CalendarIcon}
-                    title="Daily Schedule"
-                    iconColor="blue.500"
-                    action={{
-                      label: 'View All',
-                      onClick: () => console.log('View all schedule'),
-                    }}
-                  />
-                  <VStack spacing={0} align="stretch" divider={<Divider />}>
-                    <ScheduleItem
-                      time="08:00 AM"
-                      title="Morning Routine"
-                      category="HEALTH"
-                      categoryColor="green.500"
-                    />
-                    <ScheduleItem
-                      time="10:00 AM"
-                      title="Deep Work Session"
-                      category="WORK"
-                      categoryColor="blue.500"
-                    />
-                    <ScheduleItem
-                      time="01:00 PM"
-                      title="Gym - Leg Day"
-                      category="FITNESS"
-                      categoryColor="orange.500"
-                    />
-                  </VStack>
-                </Card>
-              </GridItem>
-
-              {/* Habit Tracking */}
-              <GridItem>
-                <Card>
-                  <SectionHeader
-                    icon={TargetIcon}
-                    title="Habit Tracking"
-                    iconColor="green.500"
-                  />
-                  <Box mb={2}>
-                    <Text fontSize="sm" color="gray.500" mb={4}>
-                      60% Complete
-                    </Text>
-                  </Box>
-                  <VStack spacing={2} align="stretch">
-                    <HabitItem label="Meditate (10m)" isCompleted />
-                    <HabitItem label="Read 20 Pages" isCompleted />
-                    <HabitItem label="No Sugar" />
-                    <HabitItem label="Hydrate 3L" />
-                  </VStack>
-                </Card>
-              </GridItem>
-
-              {/* Workout Plan */}
-              <GridItem>
-                <Card>
-                  <SectionHeader
-                    icon={DumbbellIcon}
-                    title="Workout Plan"
-                    iconColor="orange.500"
-                  />
-                  <Box
-                    bg="gray.900"
-                    borderRadius="lg"
-                    p={6}
-                    color="white"
+            {/* Workout Plan */}
+            <GridItem>
+              <Card>
+                <SectionHeader
+                  icon={DumbbellIcon}
+                  title="Workout Plan"
+                  iconColor="orange.500"
+                />
+                <Box bg="gray.900" borderRadius="lg" p={6} color="white">
+                  <Text
+                    fontSize="xs"
+                    fontWeight="semibold"
+                    color="gray.400"
+                    mb={2}
                   >
-                    <Text fontSize="xs" fontWeight="semibold" color="gray.400" mb={2}>
-                      TODAY'S WORKOUT
-                    </Text>
-                    <Text fontSize="2xl" fontWeight="bold">
-                      Leg Day Power
-                    </Text>
-                  </Box>
-                </Card>
-              </GridItem>
+                    TODAY'S WORKOUT
+                  </Text>
+                  <Text fontSize="2xl" fontWeight="bold">
+                    Leg Day Power
+                  </Text>
+                </Box>
+              </Card>
+            </GridItem>
 
-              {/* Daily Journal */}
-              <GridItem>
-                <Card>
-                  <SectionHeader
-                    icon={BookIcon}
-                    title="Daily Journal"
-                    iconColor="orange.400"
-                  />
-                  <Textarea
-                    placeholder="What's on your mind today?"
-                    size="lg"
-                    minH="150px"
-                    border="none"
-                    p={0}
-                    _focus={{ border: 'none', boxShadow: 'none' }}
-                    _placeholder={{ color: 'gray.400' }}
-                  />
-                </Card>
-              </GridItem>
-            </Grid>
-          </VStack>
-        </Container>
+            {/* Daily Journal */}
+            <GridItem>
+              <Card>
+                <SectionHeader
+                  icon={BookIcon}
+                  title="Daily Journal"
+                  iconColor="orange.400"
+                />
+                <Textarea
+                  placeholder="What's on your mind today?"
+                  size="lg"
+                  minH="150px"
+                  border="none"
+                  p={0}
+                  _focus={{ border: "none", boxShadow: "none" }}
+                  _placeholder={{ color: "gray.400" }}
+                />
+              </Card>
+            </GridItem>
+          </Grid>
+        </VStack>
+      </Container>
     </>
   );
 };
