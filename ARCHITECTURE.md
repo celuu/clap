@@ -52,24 +52,6 @@ Application-wide constants and enums.
 - Status codes
 - Configuration values
 
-### `/src/features/`
-Feature-based modules for complex features that span multiple concerns.
-
-**Structure:**
-```
-features/
-└── auth/
-    ├── components/      # Feature-specific components
-    ├── hooks/          # Feature-specific hooks
-    ├── services/       # Feature-specific services
-    └── types/          # Feature-specific types
-```
-
-**When to use:**
-- Complex features with multiple related components
-- Features that require their own business logic
-- When organizing by feature makes more sense than by type
-
 ### `/src/hooks/`
 Custom React hooks for shared logic.
 
@@ -193,12 +175,11 @@ import { Button } from '../../components/Button';
 
 ## Adding New Features
 
-1. Determine if it's a simple component or complex feature
-2. For simple components: Add to `/src/components/`
-3. For complex features: Create feature folder in `/src/features/`
-4. Add types in `/src/types/` or feature-specific types folder
-5. Create services in `/src/services/` if API calls are needed
-6. Add custom hooks in `/src/hooks/` if reusable logic is extracted
+1. Add reusable UI components to `/src/components/`
+2. Create new pages in `/src/pages/` for different routes
+3. Add shared types in `/src/types/`
+4. Create services in `/src/services/` if API calls are needed
+5. Add custom hooks in `/src/hooks/` if reusable logic is extracted
 
 ## Environment Variables
 
