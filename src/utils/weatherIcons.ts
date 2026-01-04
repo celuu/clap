@@ -1,7 +1,12 @@
+import { SunIcon } from '@chakra-ui/icons';
 import {
-  SunIcon,
-} from '@chakra-ui/icons';
-import { FaCloudRain, FaCloudSun, FaCloudShowersHeavy, FaBolt, FaSnowflake, FaSmog } from 'react-icons/fa';
+  FaCloudRain,
+  FaCloudSun,
+  FaCloudShowersHeavy,
+  FaBolt,
+  FaSnowflake,
+  FaSmog,
+} from 'react-icons/fa';
 
 export const getWeatherIcon = (description: string): { icon: any; color: string } => {
   const desc = description.toLowerCase();

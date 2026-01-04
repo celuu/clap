@@ -48,12 +48,9 @@ const TargetIcon = () => (
 );
 
 export const Dashboard = () => {
-
-
   return (
     <>
       <Container maxW="container.xl" py={8}>
-
         <VStack spacing={8} align="stretch">
           {/* Top Stats Grid */}
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -93,8 +90,8 @@ export const Dashboard = () => {
                   title="Daily Schedule"
                   iconColor="blue.500"
                   action={{
-                    label: "View All",
-                    onClick: () => console.log("View all schedule"),
+                    label: 'View All',
+                    onClick: () => console.log('View all schedule'),
                   }}
                 />
                 <VStack spacing={0} align="stretch" divider={<Divider />}>
@@ -123,11 +120,7 @@ export const Dashboard = () => {
             {/* Habit Tracking */}
             <GridItem>
               <Card>
-                <SectionHeader
-                  icon={TargetIcon}
-                  title="Habit Tracking"
-                  iconColor="green.500"
-                />
+                <SectionHeader icon={TargetIcon} title="Habit Tracking" iconColor="green.500" />
                 <Box mb={2}>
                   <Text fontSize="sm" color="gray.500" mb={4}>
                     60% Complete
@@ -145,18 +138,9 @@ export const Dashboard = () => {
             {/* Workout Plan */}
             <GridItem>
               <Card>
-                <SectionHeader
-                  icon={DumbbellIcon}
-                  title="Workout Plan"
-                  iconColor="orange.500"
-                />
+                <SectionHeader icon={DumbbellIcon} title="Workout Plan" iconColor="orange.500" />
                 <Box bg="gray.900" borderRadius="lg" p={6} color="white">
-                  <Text
-                    fontSize="xs"
-                    fontWeight="semibold"
-                    color="gray.400"
-                    mb={2}
-                  >
+                  <Text fontSize="xs" fontWeight="semibold" color="gray.400" mb={2}>
                     TODAY'S WORKOUT
                   </Text>
                   <Text fontSize="2xl" fontWeight="bold">
@@ -169,19 +153,15 @@ export const Dashboard = () => {
             {/* Daily Journal */}
             <GridItem>
               <Card>
-                <SectionHeader
-                  icon={BookIcon}
-                  title="Daily Journal"
-                  iconColor="orange.400"
-                />
+                <SectionHeader icon={BookIcon} title="Daily Journal" iconColor="orange.400" />
                 <Textarea
                   placeholder="What's on your mind today?"
                   size="lg"
                   minH="150px"
                   border="none"
                   p={0}
-                  _focus={{ border: "none", boxShadow: "none" }}
-                  _placeholder={{ color: "gray.400" }}
+                  _focus={{ border: 'none', boxShadow: 'none' }}
+                  _placeholder={{ color: 'gray.400' }}
                 />
               </Card>
             </GridItem>

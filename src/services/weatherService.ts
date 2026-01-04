@@ -41,5 +41,5 @@ export const weatherService = {
       console.error('Forecast API error:', error);
       throw error;
     }
-  }
+  },
 };

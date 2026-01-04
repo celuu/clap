@@ -104,4 +104,3 @@ export const Sidebar = ({ children }: SidebarProps) => {
 };
 
 Sidebar.NavItem = NavItem;
-

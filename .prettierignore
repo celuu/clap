@@ -1,0 +1,21 @@
+# Build output
+build/
+dist/
+node_modules/
+
+# Cache
+.cache/
+*.log
+
+# Package files
+package-lock.json
+yarn.lock
+
+# IDE
+.idea/
+.vscode/
+
+# Other
+coverage/
+.env
+

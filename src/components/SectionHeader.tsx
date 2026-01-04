@@ -10,7 +10,12 @@ interface SectionHeaderProps {
   };
 }
 
-export const SectionHeader = ({ icon, title, iconColor = 'blue.500', action }: SectionHeaderProps) => {
+export const SectionHeader = ({
+  icon,
+  title,
+  iconColor = 'blue.500',
+  action,
+}: SectionHeaderProps) => {
   return (
     <HStack justify="space-between" align="center" mb={4}>
       <HStack spacing={3}>
@@ -27,4 +32,3 @@ export const SectionHeader = ({ icon, title, iconColor = 'blue.500', action }: S
     </HStack>
   );
 };
-

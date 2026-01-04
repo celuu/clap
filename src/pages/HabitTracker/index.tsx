@@ -16,23 +16,20 @@ export const HabitTracker = () => {
     <>
       <Container maxW="container.xl" py={8}>
         <VStack spacing={6} align="stretch">
-        
-            <VStack spacing={2} align="stretch">
-              <Text fontSize="2xl" fontWeight="bold">
-                Habit Tracker
-              </Text>
-              <Text fontSize="md" color="gray.500" fontWeight="bold">
-                Build consistency! Win the day!
-              </Text>
-            </VStack>
+          <VStack spacing={2} align="stretch">
+            <Text fontSize="2xl" fontWeight="bold">
+              Habit Tracker
+            </Text>
+            <Text fontSize="md" color="gray.500" fontWeight="bold">
+              Build consistency! Win the day!
+            </Text>
+          </VStack>
 
-
-            <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-
+          <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             {habits.map((habit) => (
               <SingleHabit key={habit.id} label={habit.label} completed={habit.completed} />
             ))}
-            </Grid>
+          </Grid>
         </VStack>
       </Container>
     </>

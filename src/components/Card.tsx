@@ -21,4 +21,3 @@ export const Card = ({ children, hover = false, ...props }: CardProps) => {
     </Box>
   );
 };
-

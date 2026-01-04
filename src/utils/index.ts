@@ -8,4 +8,3 @@ export const formatDate = (date: Date): string => {
 };
 
 // Add more utility functions as needed
-

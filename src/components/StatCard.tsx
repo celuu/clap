@@ -28,4 +28,3 @@ export const StatCard = ({ label, value, icon, iconColor = 'brand.500' }: StatCa
     </Card>
   );
 };
-

@@ -1,13 +1,12 @@
 import React from 'react';
 import './styles/App.css';
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from '@chakra-ui/react';
 import theme from './config/theme';
 
 import { Dashboard } from './pages/Dashboard';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HabitTracker } from './pages/HabitTracker';
 import { AppLayout } from './components/AppLayout';
-
 
 function App() {
   return (
