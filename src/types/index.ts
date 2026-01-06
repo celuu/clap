@@ -18,5 +18,10 @@ export interface Weather {
 export interface Habit {
   id: string;
   label: string;
+  weekly_target: number;
+}
+export interface HabitCompletion {
+  id: string;
+  habit_id: string;
   completed_at: string | null;
 }

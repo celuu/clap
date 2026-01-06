@@ -13,7 +13,7 @@ export const HabitTracker = () => {
   useEffect(() => {
     const fetchHabits = async () => {
       const data = await getHabits();
-      setHabits(data);
+      console.log(data);
     };
     fetchHabits();
   }, []);
@@ -41,7 +41,7 @@ export const HabitTracker = () => {
 
           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             {habits.map((habit) => (
-              <SingleHabit key={habit.id} label={habit.label}  />
+              <SingleHabit key={habit.id} habit={habit} />
             ))}
           </Grid>
         </VStack>
