@@ -1,26 +1,24 @@
-import { Container, VStack, Text, Grid, Button, HStack } from '@chakra-ui/react';
+import { Container, VStack, Text, Grid, Button, HStack, useDisclosure } from '@chakra-ui/react';
 import { Card } from '../../components/Card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SingleHabit } from './SingleHabit';
-import { createHabit } from '../../services/habitService';
+import { createHabit, getHabits } from '../../services/habitService';
 import { AddIcon } from '@chakra-ui/icons';
+import { CreateHabitModal } from './CreateHabitModal';
+import { Habit } from '@/types';
 
 export const HabitTracker = () => {
-  const [habits, setHabits] = useState([
-    { id: 1, label: 'Meditate', completed: false },
-    { id: 2, label: 'Exercise', completed: false },
-    { id: 3, label: 'Read', completed: false },
-    { id: 4, label: 'Write', completed: false },
-    { id: 5, label: 'Code', completed: false },
-    { id: 6, label: 'Sleep', completed: false },
-  ]);
+  const [habits, setHabits] = useState<Habit[]>([]);
+  
+  useEffect(() => {
+    const fetchHabits = async () => {
+      const data = await getHabits();
+      setHabits(data);
+    };
+    fetchHabits();
+  }, []);
 
-  const handleCreate = async () => {
-    await createHabit({
-      label: 'Hello',
-      completed: false,
-    });
-  };
+  const {isOpen, onOpen, onClose} = useDisclosure();
 
   return (
     <>
@@ -35,14 +33,15 @@ export const HabitTracker = () => {
                 Build consistency! Win the day!
               </Text>
             </VStack>
-            <Button onClick={handleCreate} leftIcon={<AddIcon />}>
+            <Button onClick={onOpen} leftIcon={<AddIcon />}>
               Create Habit
             </Button>
+            <CreateHabitModal isOpen={isOpen} onClose={onClose} />
           </HStack>
 
           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             {habits.map((habit) => (
-              <SingleHabit key={habit.id} label={habit.label} completed={habit.completed} />
+              <SingleHabit key={habit.id} label={habit.label}  />
             ))}
           </Grid>
         </VStack>

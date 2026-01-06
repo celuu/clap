@@ -14,3 +14,9 @@ export interface Weather {
   humidity: number;
   windSpeed: number;
 }
+
+export interface Habit {
+  id: string;
+  label: string;
+  completed_at: string | null;
+}

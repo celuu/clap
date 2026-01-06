@@ -10,7 +10,7 @@ export const getHabits = async () => {
   return data;
 };
 
-export const createHabit = async (habit: { label: string; completed: boolean }) => {
+export const createHabit = async (habit: { label: string; completed_at: string | null }) => {
   const { data, error } = await supabase.from('habit_item').insert(habit).select();
 
   if (error) throw error;
