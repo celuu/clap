@@ -13,7 +13,7 @@ export const HabitTracker = () => {
   useEffect(() => {
     const fetchHabits = async () => {
       const data = await getHabits();
-      console.log(data);
+      setHabits(data);
     };
     fetchHabits();
   }, []);

@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, Input, Button, ModalFooter, VStack } from "@chakra-ui/react";
+import { Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, Input, Button, ModalFooter, VStack, FormErrorMessage, FormLabel, FormControl } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { createHabit as createHabitService } from '../../services/habitService';
 import { Habit } from "@/types";
@@ -15,12 +15,14 @@ type HabitFormData = {
 }
 
 export const CreateHabitModal = ({ isOpen, onClose, existingHabit }: CreateHabitModalProps) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<HabitFormData>({
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<HabitFormData>({
     defaultValues: {
       label: existingHabit?.label ?? '',
       weekly_target: existingHabit?.weekly_target ?? 1,
     }
   });
+
+  const formData = watch();
 
   const onSubmit = async (data: HabitFormData) => {
     await createHabitService({
@@ -37,26 +39,34 @@ export const CreateHabitModal = ({ isOpen, onClose, existingHabit }: CreateHabit
           <ModalHeader>Create Habit</ModalHeader>
           <ModalBody>
             <VStack spacing={4}>
-              <Input
-                placeholder="Habit"
-                {...register('label', { required: true })}
-              />
-              <Input
-                placeholder="Weekly Target"
-                type="number"
-                min={1}
-                max={7}
-                {...register('weekly_target', { 
-                  required: true, 
-                  valueAsNumber: true,
-                  min: 1,
-                  max: 7
-                })}
-              />
+              <FormControl isInvalid={!!errors.label}>
+                <FormLabel>Habit</FormLabel>
+                <Input
+                  placeholder="Habit"
+                  {...register('label', { required: true })}
+                />
+                {errors.label && <FormErrorMessage color="red.500">{errors.label.message}</FormErrorMessage>}
+              </FormControl>
+              <FormControl isInvalid={!!errors.weekly_target}>
+                <FormLabel>Weekly Target</FormLabel>
+                <Input
+                  placeholder="Weekly Target"
+                  type="number"
+                  min={1}
+                  max={7}
+                  {...register('weekly_target', { 
+                    required: true, 
+                    valueAsNumber: true,
+                    min: 1,
+                    max: 7
+                  })}
+                />
+              </FormControl>
+              {errors.weekly_target && <FormErrorMessage color="red.500">{errors.weekly_target.message}</FormErrorMessage>}
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button type="submit" colorScheme="blue">
+            <Button type="submit" colorScheme="blue" disabled={!formData.label}>
               Create
             </Button>
           </ModalFooter>
