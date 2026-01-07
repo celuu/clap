@@ -7,6 +7,7 @@ import { Dashboard } from './pages/Dashboard';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HabitTracker } from './pages/HabitTracker';
 import { AppLayout } from './components/AppLayout';
+import { HighLow } from './pages/HighLow';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/habit-tracker" element={<HabitTracker />} />
+            <Route path="/high-low" element={<HighLow />} />
           </Routes>
         </AppLayout>
       </BrowserRouter>

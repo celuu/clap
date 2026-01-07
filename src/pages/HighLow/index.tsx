@@ -1,0 +1,128 @@
+import { AddIcon } from "@chakra-ui/icons";
+import { Container, VStack, HStack, Text, Grid, Box, FormControl, FormLabel, Input, Textarea, Center, Button, Card } from '@chakra-ui/react';
+import { useState, useMemo } from "react";
+import Calendar from 'react-calendar';
+import './calendar.css';
+import { useForm } from "react-hook-form";
+  type ValuePiece = Date | null;
+
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+  type HighLowFormData = {
+    high_content: string;
+    low_content: string;
+  }
+
+export const HighLow = () => {
+
+    const [value, onChange] = useState<Value>(new Date());
+    const [dateSelected, setDateSelected] = useState<Date>(new Date());
+    const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<HighLowFormData>({
+      defaultValues: {
+        high_content: '',
+        low_content: '',
+      }
+    });
+
+    const formData = watch();
+
+  const highPlaceholders = [
+    "What made you happy today?",
+    "What went well today?",
+    "What did you achieve today?",
+    "What did you learn today?",
+    "What did you discover today?",
+    "What did you create today?",
+    "What did you build today?",
+  ];
+
+  const lowPlaceholders = [
+    "What could have been better today?",
+    "What made you frustrated today?",
+    "What made you stressed today?",
+    "What was challenging today?",
+    "What was difficult today?",
+  ];
+
+  const todayKey = new Date().toISOString().split('T')[0];
+  
+  const getDailyPlaceholder = (type: 'high' | 'low', placeholders: string[]) => {
+    const storageKey = `${type}Placeholder_${todayKey}`;
+    const stored = localStorage.getItem(storageKey);
+    
+    if (stored) {
+      return stored;
+    }
+    
+    const randomPlaceholder = placeholders[Math.floor(Math.random() * placeholders.length)];
+    localStorage.setItem(storageKey, randomPlaceholder);
+    return randomPlaceholder;
+  };
+
+  const randomHighPlaceholder = useMemo(() => getDailyPlaceholder('high', highPlaceholders), [todayKey]);
+  const randomLowPlaceholder = useMemo(() => getDailyPlaceholder('low', lowPlaceholders), [todayKey]);
+  
+  return (
+    <>
+      <Container maxW="container.xl" py={8}>
+        <VStack spacing={6} align="stretch">
+          <HStack justify="space-between">
+            <VStack spacing={2} align="stretch">
+              <Text fontSize="2xl" fontWeight="bold">
+                Daily High Low
+              </Text>
+              <Text fontSize="md" color="gray.500" fontWeight="bold">
+                Reflect on one win and one challenge each day.
+              </Text>
+            </VStack>
+          </HStack>
+          <Center>
+            <Calendar
+              onChange={(date) => setDateSelected(date as Date)}
+              value={dateSelected}
+              defaultActiveStartDate={new Date()}
+            />
+          </Center>
+
+          <Card>
+            <Text fontSize="2xl" fontWeight="bold">
+              {dateSelected.toLocaleString('default', { month: 'long' })} {dateSelected.getDate()},{' '}
+              {dateSelected.getFullYear()}
+            </Text>
+            <Text>{dateSelected.toLocaleDateString('en-US', { weekday: 'long' })}</Text>
+
+            <form style={{ width: '100%', marginTop: 30 }}>
+              <HStack spacing={4}>
+                <VStack spacing={2} width="50%">
+                  <FormControl isInvalid={!!errors.high_content}>
+                    <FormLabel>🌟 High of the day</FormLabel>
+                    <Textarea
+                      {...register('high_content', { required: true })}
+                      height="100px"
+                      placeholder={randomHighPlaceholder}
+                      resize="none"
+                    />
+                  </FormControl>
+                </VStack>
+                <VStack spacing={2} width="50%">
+                  <FormControl>
+                    <FormLabel>🌙 Low of the day</FormLabel>
+                    <Textarea
+                      {...register('low_content', { required: true })}
+                      height="100px"
+                      placeholder={randomLowPlaceholder}
+                      resize="none"
+                    />
+                  </FormControl>
+                </VStack>
+              </HStack>
+              <Button marginTop={8} width="100%" type="submit" colorScheme="blue">
+                Save (Cmd + Enter)
+              </Button>
+            </form>
+          </Card>
+        </VStack>
+      </Container>
+    </>
+  );
+};

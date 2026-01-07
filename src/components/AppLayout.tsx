@@ -51,9 +51,9 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         />
         <Sidebar.NavItem
           icon={BookIcon}
-          label="Daily Journal"
-          isActive={location.pathname === '/journal'}
-          onClick={() => navigate('/journal')}
+          label="Daily High Low"
+          isActive={location.pathname === '/high-low'}
+          onClick={() => navigate('/high-low')}
         />
         <Sidebar.NavItem
           icon={CalendarIcon}
