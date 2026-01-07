@@ -6,8 +6,6 @@ export interface User {
   // Add more fields as needed
 }
 
-// Add more types as your application grows
-
 export interface Weather {
   temperature: number;
   description: string;
