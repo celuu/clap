@@ -28,7 +28,6 @@ export interface HabitCompletion {
 
 export interface HighLow {
   id: string;
-  user_id: string;
   high_content: string;
   low_content: string;
   date: string;
