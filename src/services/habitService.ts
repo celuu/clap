@@ -17,7 +17,6 @@ export const createHabit = async (habit: { label: string; weekly_target: number 
 };
 
 export const deleteHabit = async (id: string) => {
-  console.log('deleting habit', id);
   const {error } = await supabase.from('habits').delete().eq('id', id).select();
   if (!error) await getHabits();
   if (error) throw error;
