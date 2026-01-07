@@ -25,3 +25,10 @@ export interface HabitCompletion {
   habit_id: string;
   completed_at: string | null;
 }
+
+export interface HighLow {
+  id: string;
+  high_content: string;
+  low_content: string;
+  date: string;
+}

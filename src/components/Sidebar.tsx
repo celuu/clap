@@ -91,7 +91,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
           <Avatar size="sm" name="Alex Johnson" bg="brand.500" />
           <VStack align="flex-start" spacing={0}>
             <Text fontSize="sm" fontWeight="semibold">
-              Alex Johnson
+              Christine Luu
             </Text>
             <Text fontSize="xs" color="gray.500">
               Premium Member
