@@ -8,18 +8,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HabitTracker } from './pages/HabitTracker';
 import { AppLayout } from './components/AppLayout';
 import { HighLow } from './pages/HighLow';
+import { LoginPage } from './pages/Login';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <AppLayout>
-          <Routes>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <AppLayout>
             <Route path="/" element={<Dashboard />} />
             <Route path="/habit-tracker" element={<HabitTracker />} />
             <Route path="/high-low" element={<HighLow />} />
-          </Routes>
-        </AppLayout>
+          </AppLayout>
+        </Routes>
       </BrowserRouter>
     </ChakraProvider>
   );

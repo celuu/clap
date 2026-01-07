@@ -1,10 +1,11 @@
 import { Box, Icon } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { CalendarIcon } from '@chakra-ui/icons';
 import { Sidebar } from './Sidebar';
 import { Layout } from './Layout';
 import { Header } from './Header';
+import { getCurrentUser } from '@/services/loginService';
 
 // Custom icons
 const TargetIcon = () => (
@@ -30,6 +31,11 @@ interface AppLayoutProps {
 }
 
 export const AppLayout = ({ children }: AppLayoutProps) => {
+  const user = getCurrentUser();
+
+  if(!user) {
+    return <></>
+  }
   const navigate = useNavigate();
   const location = useLocation();
 
