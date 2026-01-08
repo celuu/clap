@@ -1,11 +1,11 @@
 import { Box, Icon } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { CalendarIcon } from '@chakra-ui/icons';
 import { Sidebar } from './Sidebar';
 import { Layout } from './Layout';
 import { Header } from './Header';
-import { getCurrentUser } from '@/services/loginService';
+import { getCurrentUser } from '../services/loginService';
 
 // Custom icons
 const TargetIcon = () => (
@@ -26,18 +26,11 @@ const DumbbellIcon = () => (
   </Icon>
 );
 
-interface AppLayoutProps {
-  children: ReactNode;
-}
-
-export const AppLayout = ({ children }: AppLayoutProps) => {
-  const user = getCurrentUser();
-
-  if(!user) {
-    return <></>
-  }
+export const AppLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  
 
   return (
     <Box>
@@ -46,8 +39,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
         <Sidebar.NavItem
           icon={CalendarIcon}
           label="Dashboard"
-          isActive={location.pathname === '/'}
-          onClick={() => navigate('/')}
+          isActive={location.pathname === '/dashboard'}
+          onClick={() => navigate('/dashboard')}
         />
         <Sidebar.NavItem
           icon={TargetIcon}
@@ -78,7 +71,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
       {/* Main Content - with Layout spacing */}
       <Layout>
         <Header userName="Christine" />
-        {children}
+
       </Layout>
     </Box>
   );

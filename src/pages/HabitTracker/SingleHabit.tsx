@@ -12,9 +12,7 @@ export const SingleHabit = ({ habit }: SingleHabitProps) => {
 
 
   const handleDeleteHabit = async () => {
-    console.log('deleting habit', habit.id);
     await deleteHabit(habit.id);
-    console.log('habit deleted');
   };
   return (
     <Card bgColor="white" borderRadius="lg" p={4} boxShadow="md" border="1px solid #e2e8f0">

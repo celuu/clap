@@ -1,8 +1,7 @@
 import { Container, VStack, Text, Grid, Button, HStack, useDisclosure } from '@chakra-ui/react';
-import { Card } from '../../components/Card';
 import { useEffect, useState } from 'react';
 import { SingleHabit } from './SingleHabit';
-import { createHabit, getHabits } from '../../services/habitService';
+import {  getHabits } from '../../services/habitService';
 import { AddIcon } from '@chakra-ui/icons';
 import { CreateHabitModal } from './CreateHabitModal';
 import { Habit } from '@/types';
