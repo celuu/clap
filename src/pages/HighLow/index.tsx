@@ -67,26 +67,42 @@ export const HighLow = () => {
     const loadHighLow = async () => {
       try {
         const dateString = dateSelected.toISOString().split('T')[0];
-        const existingEntry = await getHighLowByDate( dateString);
+        console.log('📅 Loading high/low for date:', dateString);
+        const existingEntry = await getHighLowByDate(dateString);
         
         if (existingEntry) {
+          console.log('✅ Found existing entry:', existingEntry);
           reset({
             high_content: existingEntry.high_content,
             low_content: existingEntry.low_content,
           });
         } else {
+          console.log('ℹ️ No entry found for this date');
           reset({
             high_content: '',
             low_content: '',
           });
         }
-      } catch (error) {
-        console.error('Error loading high/low:', error);
+      } catch (error: any) {
+        console.error('❌ Error loading high/low:', error);
+        console.error('Error details:', {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+          hint: error.hint
+        });
+        toast({
+          title: 'Error loading entry',
+          description: error.message || 'This might be an RLS policy issue. Check console for details.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       }
     };
     
     loadHighLow();
-  }, [dateSelected, reset]);
+  }, [dateSelected, reset, toast]);
 
   const onSubmit = async (data: HighLowFormData) => {
     setIsLoading(true);

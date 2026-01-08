@@ -8,11 +8,25 @@ import { Habit } from '@/types';
 
 export const HabitTracker = () => {
   const [habits, setHabits] = useState<Habit[]>([]);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
     const fetchHabits = async () => {
-      const data = await getHabits();
-      setHabits(data);
+      try {
+        console.log('🎯 Fetching habits...');
+        const data = await getHabits();
+        console.log('✅ Habits fetched:', data);
+        setHabits(data);
+      } catch (err: any) {
+        console.error('❌ Error fetching habits:', err);
+        console.error('Error details:', {
+          message: err.message,
+          code: err.code,
+          details: err.details,
+          hint: err.hint
+        });
+        setError(err.message || 'Failed to fetch habits');
+      }
     };
     fetchHabits();
   }, []);
@@ -38,7 +52,20 @@ export const HabitTracker = () => {
             <CreateHabitModal isOpen={isOpen} onClose={onClose} />
           </HStack>
 
+          {error && (
+            <Text color="red.500" bg="red.50" p={4} borderRadius="md">
+              ⚠️ Error: {error}
+              <br />
+              <Text fontSize="sm" mt={2}>
+                Check browser console for details. This is likely a Row Level Security (RLS) policy issue in Supabase.
+              </Text>
+            </Text>
+          )}
+
           <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+            {habits.length === 0 && !error && (
+              <Text color="gray.500">No habits yet. Create one to get started!</Text>
+            )}
             {habits.map((habit) => (
               <SingleHabit key={habit.id} habit={habit} />
             ))}

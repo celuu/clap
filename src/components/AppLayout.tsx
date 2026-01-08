@@ -1,6 +1,6 @@
 import { Box, Icon } from '@chakra-ui/react';
-import { ReactNode, useEffect } from 'react';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { CalendarIcon } from '@chakra-ui/icons';
 import { Sidebar } from './Sidebar';
 import { Layout } from './Layout';
@@ -29,8 +29,30 @@ const DumbbellIcon = () => (
 export const AppLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const user = await getCurrentUser();
+        
+        if (!user) {
+          navigate('/login');
+        } else {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+        navigate('/login');
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
+  if (isAuthenticated === null) {
+    return <Box>Loading...</Box>;
+  }
 
   return (
     <Box>
@@ -54,7 +76,7 @@ export const AppLayout = () => {
           isActive={location.pathname === '/high-low'}
           onClick={() => navigate('/high-low')}
         />
-        <Sidebar.NavItem
+        {/* <Sidebar.NavItem
           icon={CalendarIcon}
           label="Daily Schedule"
           isActive={location.pathname === '/schedule'}
@@ -65,13 +87,13 @@ export const AppLayout = () => {
           label="Workout Plans"
           isActive={location.pathname === '/workouts'}
           onClick={() => navigate('/workouts')}
-        />
+        /> */}
       </Sidebar>
 
       {/* Main Content - with Layout spacing */}
       <Layout>
         <Header userName="Christine" />
-
+        <Outlet />
       </Layout>
     </Box>
   );
