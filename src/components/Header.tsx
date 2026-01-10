@@ -9,14 +9,10 @@ interface HeaderProps {
   date?: string;
 }
 
-export const Header = ({ userName = 'Christine', date }: HeaderProps) => {
+export const Header = ({ userName = 'Christine' }: HeaderProps) => {
   const [weather, setWeather] = useState<Weather | null>(null);
-
   useEffect(() => {
-    weatherService
-      .getCurrentWeather()
-      .then((data: Weather) => setWeather(data))
-      .catch((err) => console.error(err));
+    weatherService.getCurrentWeather().then((data: Weather) => setWeather(data));
   }, []);
 
   const weatherIcon = getWeatherIcon(weather?.description || 'sunny');
@@ -55,21 +51,26 @@ export const Header = ({ userName = 'Christine', date }: HeaderProps) => {
         <HStack spacing={2}>
           <Tag
             bg="gray.50"
-            borderRadius="full"
+            borderRadius="md"
             border="1px solid"
             borderColor="gray.200"
             px={4}
             py={2}
           >
-            <HStack spacing={2}>
-              <Icon as={weatherIcon.icon} color={weatherIcon.color} boxSize={5} />
-              <Text fontSize="md" color="gray.800" fontWeight="bold">
-                {weather?.temperature}°F
-              </Text>
-              <Text fontSize="md" color="gray.500">
-                {weather?.description}
-              </Text>
-            </HStack>
+            <VStack>
+              <HStack spacing={2}>
+                <Icon as={weatherIcon.icon} color={weatherIcon.color} boxSize={5} />
+                <Text fontSize="md" color="gray.800" fontWeight="bold">
+                  {weather?.temperature}°F
+                </Text>
+                <Text fontSize="md" color="gray.500">
+                  {weather?.description}
+                </Text>
+              </HStack>
+            <Text fontSize="xs" color="gray.500">
+              Dublin, CA
+            </Text>
+            </VStack>
           </Tag>
           <Button
             leftIcon={<Icon as={AddIcon} />}

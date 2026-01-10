@@ -1,12 +1,16 @@
+import { useEffect, useState } from "react";
+
 // src/services/weatherService.ts
 const WEATHER_API = process.env.REACT_APP_WEATHER_API;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 export const weatherService = {
   async getCurrentWeather() {
+    const latitude = 37.7117984000001;
+    const longitude = -121.88571939417722;
     try {
       const response = await fetch(
-        `${BASE_URL}/weather?lat=37.71337629259278&lon=-121.88644296702584&appid=${WEATHER_API}&units=imperial`
+        `${BASE_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API}&units=imperial`
       );
 
       if (!response.ok) {
@@ -20,6 +24,8 @@ export const weatherService = {
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
       };
+
+
     } catch (error) {
       console.error('Weather API error:', error);
       throw error;
@@ -42,4 +48,5 @@ export const weatherService = {
       throw error;
     }
   },
+
 };
