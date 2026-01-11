@@ -13,18 +13,9 @@ export const HabitTracker = () => {
   useEffect(() => {
     const fetchHabits = async () => {
       try {
-        console.log('🎯 Fetching habits...');
         const data = await getHabits();
-        console.log('✅ Habits fetched:', data);
         setHabits(data);
       } catch (err: any) {
-        console.error('❌ Error fetching habits:', err);
-        console.error('Error details:', {
-          message: err.message,
-          code: err.code,
-          details: err.details,
-          hint: err.hint
-        });
         setError(err.message || 'Failed to fetch habits');
       }
     };
@@ -49,12 +40,12 @@ export const HabitTracker = () => {
             <Button onClick={onOpen} leftIcon={<AddIcon />}>
               Create Habit
             </Button>
-            <CreateHabitModal isOpen={isOpen} onClose={onClose} />
+            <CreateHabitModal isOpen={isOpen} onClose={onClose} onCreated={(habit: Habit) => setHabits([...habits, habit])} />
           </HStack>
 
           {error && (
             <Text color="red.500" bg="red.50" p={4} borderRadius="md">
-              ⚠️ Error: {error}
+              Error: {error}
               <br />
               <Text fontSize="sm" mt={2}>
                 Check browser console for details. This is likely a Row Level Security (RLS) policy issue in Supabase.

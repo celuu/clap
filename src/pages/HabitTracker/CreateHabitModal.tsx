@@ -7,14 +7,15 @@ type CreateHabitModalProps = {
   isOpen: boolean;
   onClose: () => void;
   existingHabit?: Habit;
-}
+  onCreated?: (habit: Habit) => void;
+};
 
 type HabitFormData = {
   label: string;
   weekly_target: number;
 }
 
-export const CreateHabitModal = ({ isOpen, onClose, existingHabit }: CreateHabitModalProps) => {
+export const CreateHabitModal = ({ isOpen, onClose, existingHabit, onCreated }: CreateHabitModalProps) => {
   const { register, handleSubmit, formState: { errors }, watch } = useForm<HabitFormData>({
     defaultValues: {
       label: existingHabit?.label ?? '',
@@ -29,6 +30,7 @@ export const CreateHabitModal = ({ isOpen, onClose, existingHabit }: CreateHabit
       label: data.label,
       weekly_target: data.weekly_target,
     });
+    onCreated?.(data as Habit);
     onClose();
   };
   return (
