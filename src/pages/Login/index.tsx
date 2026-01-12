@@ -82,7 +82,12 @@ export const LoginPage = () => {
 
   return (
     <Container maxW="md" p={4}>
-      <VStack spacing={4} align="center" justify="center" h="100vh">
+      <Text>
+        Hi Jacob, sorry, I am actually not ready to show this yet. Please check back later. I wanted
+        to get more done but I had a takehome to do so I want to get those things done before you
+        take a look! I miss you sm! 🥲😭
+      </Text>
+      {/* <VStack spacing={4} align="center" justify="center" h="100vh">
         <Heading size="lg">{isSignUp ? 'Sign Up' : 'Login'}</Heading>
         
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
@@ -151,7 +156,7 @@ export const LoginPage = () => {
             </Box>
           </VStack>
         </form>
-      </VStack>
+      </VStack> */}
     </Container>
   );
 };
