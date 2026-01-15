@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, Input, FormLabel, FormControl, Textarea } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, Input, FormLabel, FormControl, Textarea, Button, ModalFooter } from "@chakra-ui/react";
 
 type UserModalProps = {
   isOpen: boolean;
@@ -20,7 +20,11 @@ export const UserModal = ({ isOpen, onClose }: UserModalProps) => {
             <Textarea placeholder="Your goals" />
           </FormControl>
         </ModalBody>
+      
       </ModalContent>
+      <ModalFooter>
+        <Button colorScheme="blue" onClick={onClose}>Save</Button>
+      </ModalFooter>
     </Modal>
   );
 };
