@@ -1,3 +1,4 @@
+import { getProfile } from '@/services/userService';
 import {
   Box,
   VStack,
@@ -8,7 +9,7 @@ import {
   Divider,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface NavItemProps {
   icon: any;
@@ -50,7 +51,14 @@ interface SidebarProps {
 export const Sidebar = ({ children }: SidebarProps) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
-
+  const [userName, setUserName] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profile = await getProfile();
+      setUserName(profile.first_name + ' ' + profile.last_name);
+    };
+    fetchProfile();
+  }, []);
   return (
     <Box
       w="280px"
@@ -91,7 +99,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
           <Avatar size="sm" name="Alex Johnson" bg="brand.500" />
           <VStack align="flex-start" spacing={0}>
             <Text fontSize="sm" fontWeight="semibold">
-              Christine Luu
+              {userName}
             </Text>
             <Text fontSize="xs" color="gray.500">
               Premium Member
