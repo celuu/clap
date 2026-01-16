@@ -22,51 +22,58 @@ export const UserModal = ({ isOpen, onClose }: UserModalProps) => {
   const formData = watch();
   const toast = useToast();
 
-  // const {error} = createProfile(formData)
-  console.log(formData)
+
 
   const onSubmit = async (data: UserFormData) => {
-    await createProfile({
-      first_name: data.first_name,
-      last_name: data.last_name,
-      goals: data.goals
-    })
-    onClose();
-    toast({
+  try {
+    await createProfile(data);
 
-    })
+    toast({
+      title: 'Profile created',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+
+    onClose();
+  } catch (error: any) {
+    toast({
+      title: 'Failed to create profile',
+      description: error.message,
+      status: 'error',
+      duration: 4000,
+      isClosable: true,
+    });
+  }
   }
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
       <ModalOverlay />
-        <form onSubmit={handleSubmit(onSubmit)}>
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>Before you start, please tell us a bit about yourself!</ModalHeader>
-        <ModalBody display={'flex'} gap={'6'} flexDirection={'column'}>
-        
-          <HStack>
-            <FormControl isRequired width={'50%'}>
-              <FormLabel>First Name</FormLabel>
-              <Input placeholder="Your name" {...(register('first_name'), { required: true })} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalHeader>Before you start, please tell us a bit about yourself!</ModalHeader>
+          <ModalBody display={'flex'} gap={'6'} flexDirection={'column'}>
+            <HStack>
+              <FormControl isRequired width={'50%'}>
+                <FormLabel>First Name</FormLabel>
+                <Input placeholder="Your name" {...register('first_name', { required: true })} />
+              </FormControl>
+              <FormControl isRequired width={'50%'}>
+                <FormLabel>Last Name</FormLabel>
+                <Input placeholder="Your name" {...register('last_name', { required: true })} />
+              </FormControl>
+            </HStack>
+            <FormControl isRequired>
+              <FormLabel>What are your goals?</FormLabel>
+              <Textarea placeholder="Your goals" {...register('goals', { required: true })} />
             </FormControl>
-            <FormControl isRequired width={'50%'}>
-              <FormLabel>Last Name</FormLabel>
-              <Input placeholder="Your name" {...(register('last_name'), { required: true })} />
-            </FormControl>
-          </HStack>
-          <FormControl isRequired>
-            <FormLabel>What are your goals?</FormLabel>
-            <Textarea placeholder="Your goals" {...(register('goals'), { required: true })} />
-          </FormControl>
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="blue" onClick={onClose}>
-            Save
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-        </form>
+          </ModalBody>
+          <ModalFooter>
+            <Button type="submit">Save</Button>
+          </ModalFooter>
+        </ModalContent>
+      </form>
     </Modal>
   );
 };
