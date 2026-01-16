@@ -1,4 +1,4 @@
-import { getProfile } from '@/services/userService';
+import { getProfile } from '../services/userService';
 import {
   Box,
   VStack,
@@ -55,7 +55,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
   useEffect(() => {
     const fetchProfile = async () => {
       const profile = await getProfile();
-      setUserName(profile.first_name + ' ' + profile.last_name);
+      setUserName((profile.first_name ?? "Christine") + ' ' + (profile.last_name ?? "luu"));
     };
     fetchProfile();
   }, []);

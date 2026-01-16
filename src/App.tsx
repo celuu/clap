@@ -16,8 +16,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Navigate replace to="/dashboard" />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/habit-tracker" element={<HabitTracker />} />
             <Route path="/high-low" element={<HighLow />} />

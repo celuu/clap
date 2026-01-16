@@ -16,10 +16,11 @@ import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { ScheduleItem } from '../../components/ScheduleItem';
 import { HabitItem } from '../../components/HabitItem';
-import { UserModal } from '../Login/userModal';
+
 import { getProfile } from '../../services/userService';
 import { useEffect, useState } from 'react';
 import { Profile } from '../../types';
+import { UserModal } from '../Login/UserModal';
 
 // Custom icons as components
 const FireIcon = () => (

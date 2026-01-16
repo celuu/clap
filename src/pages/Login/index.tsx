@@ -1,8 +1,9 @@
-import { Container, VStack, Text, Input, Button, Heading, FormControl, FormLabel, useToast, Link, Box } from '@chakra-ui/react';
+import { Container, VStack, Text, Input, Button, Heading, FormControl, FormLabel, useToast, Link, Box, IconButton, Checkbox, HStack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, signUpNewUser } from '../../services/loginService';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 type AuthFormData = {
   email: string;
@@ -15,19 +16,44 @@ export const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const getUsername = () => {
+    return localStorage.getItem('username');
+  }
+  const [saveUsernameToStorage, setSaveUsernameToStorage] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<AuthFormData>({
     defaultValues: {
-      email: '',
+      email: getUsername() || "",
       password: '',
       confirmPassword: '',
     }
   });
 
   const password = watch('password');
+  const email = watch('email');
+
+  const saveUsername = () => {
+    if (email) {
+      localStorage.setItem('username', email);
+    }
+  }
+
+
+  const removeUsername = () => {
+    const email = getUsername();
+    if(!email) return null
+    return email
+  }
 
   const onSubmit = async (data: AuthFormData) => {
     setIsLoading(true);
+    if(saveUsernameToStorage) {
+      saveUsername()
+    } else {
+      removeUsername()
+    }
     
     try {
       if (isSignUp) {
@@ -87,65 +113,88 @@ export const LoginPage = () => {
         to get more done but I had a takehome to do so I want to get those things done before you
         take a look! I miss you sm! 🥲😭
       </Text>
-      {/* <VStack spacing={4} align="center" justify="center" h="100vh">
+      <VStack spacing={4} align="center" justify="center" h="100vh">
         <Heading size="lg">{isSignUp ? 'Sign Up' : 'Login'}</Heading>
-        
+
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
           <VStack spacing={4} width="100%">
             <FormControl isRequired>
               <FormLabel>Email</FormLabel>
-              <Input 
+              <Input
                 type="email"
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: 'Invalid email address'
-                  }
-                })} 
+                    message: 'Invalid email address',
+                  },
+                })}
+                defaultValue={getUsername() ?? ''}
               />
-              {errors.email && <Text color="red.500" fontSize="sm">{errors.email.message}</Text>}
+              {errors.email && (
+                <Text color="red.500" fontSize="sm">
+                  {errors.email.message}
+                </Text>
+              )}
             </FormControl>
-            
+
             <FormControl isRequired>
               <FormLabel>Password</FormLabel>
-              <Input 
-                type="password"
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password must be at least 6 characters'
-                  }
-                })} 
-              />
-              {errors.password && <Text color="red.500" fontSize="sm">{errors.password.message}</Text>}
+              <HStack>
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Password must be at least 6 characters',
+                    },
+                  })}
+                />
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </HStack>
+              {errors.password && (
+                <Text color="red.500" fontSize="sm">
+                  {errors.password.message}
+                </Text>
+              )}
             </FormControl>
-            
+            <Checkbox checked={saveUsernameToStorage} onChange={() => setSaveUsernameToStorage(!saveUsernameToStorage)} alignSelf={'flex-start'}>
+              Save Username
+            </Checkbox>
             {isSignUp && (
               <FormControl isRequired>
                 <FormLabel>Confirm Password</FormLabel>
-                <Input 
+                <Input
                   type="password"
                   {...register('confirmPassword', {
                     required: isSignUp ? 'Please confirm your password' : false,
-                    validate: (value) => !isSignUp || value === password || 'Passwords do not match'
-                  })} 
+                    validate: (value) =>
+                      !isSignUp || value === password || 'Passwords do not match',
+                  })}
                 />
-                {errors.confirmPassword && <Text color="red.500" fontSize="sm">{errors.confirmPassword.message}</Text>}
+                {errors.confirmPassword && (
+                  <Text color="red.500" fontSize="sm">
+                    {errors.confirmPassword.message}
+                  </Text>
+                )}
               </FormControl>
             )}
-            
-            <Button 
-              width="100%" 
-              marginTop={4} 
+
+            <Button
+              width="100%"
+              marginTop={4}
               type="submit"
               colorScheme="blue"
               isLoading={isLoading}
             >
               {isSignUp ? 'Sign Up' : 'Login'}
             </Button>
-            
+
             <Box textAlign="center">
               <Text fontSize="sm">
                 {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
@@ -156,7 +205,7 @@ export const LoginPage = () => {
             </Box>
           </VStack>
         </form>
-      </VStack> */}
+      </VStack>
     </Container>
   );
 };
