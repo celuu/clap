@@ -21,7 +21,7 @@ export const LoginPage = () => {
   const getUsername = () => {
     return localStorage.getItem('username');
   }
-  const [saveUsernameToStorage, setSaveUsernameToStorage] = useState(false)
+  const [saveUsernameToStorage, setSaveUsernameToStorage] = useState(getUsername() === null ? false : true)
 
   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<AuthFormData>({
     defaultValues: {
@@ -43,6 +43,7 @@ export const LoginPage = () => {
 
   const removeUsername = () => {
     const email = getUsername();
+    localStorage.removeItem('username')
     if(!email) return null
     return email
   }
@@ -163,7 +164,7 @@ export const LoginPage = () => {
                 </Text>
               )}
             </FormControl>
-            <Checkbox checked={saveUsernameToStorage} onChange={() => setSaveUsernameToStorage(!saveUsernameToStorage)} alignSelf={'flex-start'}>
+            <Checkbox isChecked={!!saveUsernameToStorage} onChange={() => setSaveUsernameToStorage(!saveUsernameToStorage)} alignSelf={'flex-start'}>
               Save Username
             </Checkbox>
             {isSignUp && (
