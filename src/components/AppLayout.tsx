@@ -6,6 +6,7 @@ import { Sidebar } from './Sidebar';
 import { Layout } from './Layout';
 import { Header } from './Header';
 import { getCurrentUser } from '../services/loginService';
+import { getProfile } from '@/services/userService';
 
 // Custom icons
 const TargetIcon = () => (
@@ -30,7 +31,7 @@ export const AppLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
+  const [userName, setUserName] = useState<string | null>(null);
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -39,7 +40,9 @@ export const AppLayout = () => {
         if (!user) {
           navigate('/login');
         } else {
-          setIsAuthenticated(true);
+          const profile = await getProfile();
+          setIsAuthenticated(true)
+          setUserName(profile.first_name);
         }
       } catch (error) {
         console.error('Auth check error:', error);
@@ -92,7 +95,7 @@ export const AppLayout = () => {
 
       {/* Main Content - with Layout spacing */}
       <Layout>
-        <Header userName="Christine" />
+        <Header userName={userName || 'Superstar'} />
         <Outlet />
       </Layout>
     </Box>
