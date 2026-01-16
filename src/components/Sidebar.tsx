@@ -51,11 +51,15 @@ interface SidebarProps {
 export const Sidebar = ({ children }: SidebarProps) => {
   const bgColor = useColorModeValue('white', 'gray.800');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
-  const [userName, setUserName] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>("whatever");
   useEffect(() => {
     const fetchProfile = async () => {
-      const profile = await getProfile();
-      setUserName((profile.first_name ?? "Christine") + ' ' + (profile.last_name ?? "luu"));
+      try {
+        const profile = await getProfile();
+   
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
     };
     fetchProfile();
   }, []);

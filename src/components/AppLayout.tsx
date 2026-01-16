@@ -42,7 +42,7 @@ export const AppLayout = () => {
         } else {
           const profile = await getProfile();
           setIsAuthenticated(true)
-          setUserName(profile.first_name || "christine" );
+          setUserName("christine" );
         }
       } catch (error) {
         console.error('Auth check error:', error);

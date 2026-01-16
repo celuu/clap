@@ -16,7 +16,6 @@ import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { ScheduleItem } from '../../components/ScheduleItem';
 import { HabitItem } from '../../components/HabitItem';
-
 import { getProfile } from '../../services/userService';
 import { useEffect, useState } from 'react';
 import { Profile } from '../../types';
@@ -61,7 +60,12 @@ export const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const profile = await getProfile();
-        setProfile(profile);
+        if (!profile) {
+          setProfile(null)
+        } else {
+
+          setProfile(profile);
+        }
       } catch (error) {
         console.error('Error fetching profile:', error);
       }
