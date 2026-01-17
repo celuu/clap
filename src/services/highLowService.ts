@@ -24,8 +24,8 @@ export const getHighLowByDate = async (date: string) => {
     .select()
     .eq('date', date)
     .eq('user_id', user.id)
-    .single();
-  if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows returned
+    .maybeSingle();
+  if (error && error.code !== 'PGRST116') throw error;
   return data;
 };
 
