@@ -42,7 +42,11 @@ export const AppLayout = () => {
         } else {
           const profile = await getProfile();
           setIsAuthenticated(true)
-          setUserName("christine" );
+          if (!profile) {
+            setUserName("girlie")
+          } else {
+            setUserName(profile.first_name);
+          }
         }
       } catch (error) {
         console.error('Auth check error:', error);
@@ -52,6 +56,7 @@ export const AppLayout = () => {
 
     checkAuth();
   }, [navigate]);
+
 
   if (isAuthenticated === null) {
     return <Box>Loading...</Box>;
@@ -95,7 +100,7 @@ export const AppLayout = () => {
 
       {/* Main Content - with Layout spacing */}
       <Layout>
-        <Header userName={userName || 'Superstar'} />
+        <Header userName={userName}  />
         <Outlet />
       </Layout>
     </Box>

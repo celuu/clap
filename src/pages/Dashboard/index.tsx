@@ -63,7 +63,6 @@ export const Dashboard = () => {
         if (!profile) {
           setProfile(null)
         } else {
-
           setProfile(profile);
         }
       } catch (error) {
@@ -72,14 +71,10 @@ export const Dashboard = () => {
     };
     fetchProfile();
   }, []);
-  useEffect(() => {
-    if (!profile) {
-      onOpen();
-    }
-  }, [profile]);
   return (
     <>
-    <UserModal isOpen={isOpen} onClose={onClose} />
+      {!profile && <UserModal isOpen={isOpen} onClose={onClose} />}
+
       <Container maxW="container.xl" py={8}>
         <VStack spacing={8} align="stretch">
           {/* Top Stats Grid */}

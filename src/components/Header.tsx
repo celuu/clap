@@ -2,14 +2,15 @@ import { Box, HStack, VStack, Text, Button, Icon, Badge, Tag } from '@chakra-ui/
 import { AddIcon, SunIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { weatherService } from '../services/weatherService';
-import { Weather } from '../types';
-import { getWeatherIcon } from '../utils/weatherIcons';
-interface HeaderProps {
-  userName?: string;
-  date?: string;
+import { Profile, Weather } from '../types';
+import { getWeatherIcon } from '../utils/weatherIcons'
+import { getProfile } from '../services/userService';
+
+type HeaderProps = {
+  userName: string | null
 }
 
-export const Header = ({ userName = 'Christine' }: HeaderProps) => {
+export const Header = ({userName}: HeaderProps) => {
   const [weather, setWeather] = useState<Weather | null>(null);
   useEffect(() => {
     weatherService.getCurrentWeather().then((data: Weather) => setWeather(data));
@@ -35,12 +36,20 @@ export const Header = ({ userName = 'Christine' }: HeaderProps) => {
   const dayOfTheYear =
     Math.floor((todayPST.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
   return (
     <Box w="full" bg="white" borderBottom="1px" borderColor="gray.200" px={8} py={6}>
       <HStack justify="space-between" align="center">
         <VStack align="flex-start" spacing={1}>
           <Text fontSize="3xl" fontWeight="bold">
-            Good morning, {userName}
+            {getGreeting()}, {userName}
           </Text>
           <Text fontSize="md" color="gray.500">
             {today} - {countDownToJuly20} days to July 20th - Day {dayOfTheYear} / 365 (
@@ -67,9 +76,9 @@ export const Header = ({ userName = 'Christine' }: HeaderProps) => {
                   {weather?.description}
                 </Text>
               </HStack>
-            <Text fontSize="xs" color="gray.500">
-              Dublin, CA
-            </Text>
+              <Text fontSize="xs" color="gray.500">
+                Dublin, CA
+              </Text>
             </VStack>
           </Tag>
           <Button
