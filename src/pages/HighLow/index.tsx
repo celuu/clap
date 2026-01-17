@@ -62,7 +62,6 @@ export const HighLow = () => {
   const randomHighPlaceholder = useMemo(() => getDailyPlaceholder('high', highPlaceholders), [todayKey]);
   const randomLowPlaceholder = useMemo(() => getDailyPlaceholder('low', lowPlaceholders), [todayKey]);
   
-  // Load existing entry when date changes
   useEffect(() => {
     const loadHighLow = async () => {
       try {
@@ -146,7 +145,21 @@ export const HighLow = () => {
           </HStack>
           <Card>
             <Center>
-              <Calendar onChange={(date) => setDateSelected(date as Date)} value={dateSelected} />
+              <Calendar
+                onChange={(date) => setDateSelected(date as Date)}
+                value={dateSelected}
+                tileDisabled={({ date, view }) => {
+                  if (view !== 'month') return false;
+
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+
+                  const tileDate = new Date(date);
+                  tileDate.setHours(0, 0, 0, 0);
+
+                  return tileDate > today;
+                }}
+              />
             </Center>
           </Card>
           <Card>
