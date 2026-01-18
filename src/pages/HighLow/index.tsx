@@ -1,13 +1,9 @@
-import { AddIcon } from "@chakra-ui/icons";
 import { Container, VStack, HStack, Text, Grid, Box, FormControl, FormLabel, Input, Textarea, Center, Button, Card, useToast } from '@chakra-ui/react';
 import { useState, useMemo, useEffect } from "react";
 import Calendar from 'react-calendar';
 import './calendar.css';
 import { useForm } from "react-hook-form";
 import { upsertHighLow, getHighLowByDate } from '../../services/highLowService';
-  type ValuePiece = Date | null;
-
-  type Value = ValuePiece | [ValuePiece, ValuePiece];
 
   type HighLowFormData = {
     high_content: string;
@@ -19,12 +15,14 @@ export const HighLow = () => {
     const [dateSelected, setDateSelected] = useState<Date>(new Date());
     const [isLoading, setIsLoading] = useState(false);
     
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<HighLowFormData>({
+    const { register, handleSubmit, formState: { errors }, reset, watch} = useForm<HighLowFormData>({
       defaultValues: {
         high_content: '',
         low_content: '',
       }
     });
+
+    const formData = watch();
 
   const highPlaceholders = [
     "What made you happy today?",
@@ -99,6 +97,8 @@ export const HighLow = () => {
     loadHighLow();
   }, [dateSelected, reset, toast]);
 
+
+
   const onSubmit = async (data: HighLowFormData) => {
     setIsLoading(true);
     try {
@@ -128,6 +128,22 @@ export const HighLow = () => {
       setIsLoading(false);
     }
   };
+
+  
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+          event.preventDefault();
+          handleSubmit(onSubmit)();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [handleSubmit, onSubmit]);
   
   return (
     <>
